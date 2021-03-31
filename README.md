@@ -12,7 +12,7 @@
 本文所有代码和方案均可在[spring-mongodb-with-querydsl][6]中找到（可执行项目）。
 
 
-#### 使用Maven配置querydsl支持
+#### 使用Maven配置querydsl支持 [示例：querydsl-with-maven][7]
 
 虽然标题是在Gradle环境下配置querydsl，但是这边还是走走常见的Maven配置流程。至于为啥使用Gradle，而不
 直接使用Maven，这又是另外一个故事了= =
@@ -109,7 +109,7 @@ public class MongoAnnotationProcessor extends AbstractQuerydslProcessor {
  * 自己生成一个子模块，在子模块中继承或者拷贝spring-data-mongodb注解处理器内容，并
  在`META-INF/services/javax.annotation.processing.Processor`中声明这个处理器。
 
-第一种方式的配置如下
+第一种方式的配置如下 [示例：querydsl-classifier-general][8]
 ```groovy
 // build.gradle
 dependencies {
@@ -129,7 +129,7 @@ class User implements Serializable {
 ```
 
 第二种配置只需要修改`build.gradle`文件（需要引入`spring-data-mongodb`依赖）其实这就
-是Maven方案的翻版。
+是Maven方案的翻版。 [示例：querydsl-with-gradle-config][9]
 
 __注意：这里会覆盖掉原本的注解处理器（比如lombok），使用这种方式需要手动配置其他的注解处理器。__
 
@@ -145,7 +145,7 @@ compileJava {
 ```
 
 第三种配置需要新开个项目，然后新增`MongoAnnotationProcessor`类（其实这个类就是抄spring-data-mongodb中
-附带的那个，只是去掉了日志输出【别问，问就是强迫症】）
+附带的那个，只是去掉了日志输出【别问，问就是强迫症】） [示例：querydsl-with-export-module][10]
 ```java
 import com.querydsl.apt.AbstractQuerydslProcessor;
 import com.querydsl.apt.Configuration;
@@ -195,3 +195,7 @@ com.example.xxx.yyy.MongoAnnotationProcessor
  [4]: https://repo1.maven.org/maven2/com/querydsl/querydsl-apt/4.4.0/
  [5]: https://github.com/spring-projects/spring-data-mongodb/issues/2740
  [6]: https://github.com/wjiec/spring-mongodb-with-querydsl
+ [7]: https://github.com/wjiec/spring-mongodb-with-querydsl/tree/main/querydsl-with-maven
+ [8]: https://github.com/wjiec/spring-mongodb-with-querydsl/tree/main/querydsl-classifier-general
+ [9]: https://github.com/wjiec/spring-mongodb-with-querydsl/tree/main/querydsl-with-gradle-config
+ [10]: https://github.com/wjiec/spring-mongodb-with-querydsl/tree/main/querydsl-with-export-module
