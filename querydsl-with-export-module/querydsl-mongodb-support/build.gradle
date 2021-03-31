@@ -1,0 +1,16 @@
+plugins {
+    id 'java-library'
+}
+
+dependencies {
+    compileOnly group: 'com.querydsl', name: 'querydsl-apt', version: "${queryDslVersion}"
+    compileOnly group: 'org.springframework.boot', name: 'spring-boot-starter-data-mongodb'
+}
+
+jar {
+    enabled = true
+}
+
+bootJar {
+    enabled = false
+}
